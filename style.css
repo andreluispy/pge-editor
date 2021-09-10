@@ -1,0 +1,58 @@
+:root{
+    --cor-hover: rgba(255,255,255, .2);
+    --cor-bg: #000;
+    --cor-font-menu: #eee;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu ul{
+    background-color: var(--cor-bg);
+}
+
+.menu ul li{
+    display: inline;
+    position: relative;
+}
+
+.menu ul li a{
+    padding: 10px;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--cor-font-menu);
+    transition: .5s;
+}
+
+.menu ul li a:hover{
+    background-color: var(--cor-hover);
+}
+
+/* sub-Menu */
+
+.menu ul ul{
+    display: none;
+    position: absolute;
+    left: 0;
+}
+
+.menu ul li:hover ul{
+display: block;
+cursor: pointer;
+}
+
+.menu ul ul{
+    width: 150px;
+}
+
+.menu ul ul li a{
+    display: block;
+}
+
+.btn_play{
+    border-radius: 100%;
+}
