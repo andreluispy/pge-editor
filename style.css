@@ -1,3 +1,8 @@
+body{
+    background-color: rgb(48, 48, 48);
+    color: white;
+}
+
 :root{
     --cor-hover: rgba(255,255,255, .2);
     --cor-bg: #000;
@@ -70,11 +75,35 @@ cursor: pointer;
 }
 
 .layout canvas{
-    width: 100%;
-    height: 100%;
-    border: 1px solid;
+    border: 2px solid black;
+    background-color:rgb(94, 94, 94);
 }
 
 .props{
     border: 1px solid;
 }
+
+ /* Remove default bullets */
+ ul, #myUL {
+    list-style-type: none;
+  }
+  
+  /* Remove margins and padding from the parent ul */
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the caret/arrow */
+  .caret {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+  }
+  
+  /* Create the caret/arrow with a unicode, and style it */
+  .caret::before {
+    content: "\25B6";
+    color: white;
+    display: inline-block;
+    margin-right: 6px;
+  }

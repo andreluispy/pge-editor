@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyVisualProg</title>
+    <title>PGE Engine</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav class="menu">
             <ul>
-                <li><a href="">Project</a>
+                <li><a>Project</a>
                     <ul>
                         <li><a href="">New</a></li>
                         <li><a href="">Open</a></li>
@@ -20,26 +20,27 @@
                         <li><a href="">Close Project</a></li>
                     </ul>
                 </li>
-                <li><a href="">Settings</a>
+                <li><a>Settings</a>
                     <ul>
                         <li><a href="">Font Size</a></li>
                         <li><a href="">Theme</a></li>
                         <li><a href="">Reset Defaults</a></li>
                     </ul>
                 </li>
-                <li><a href="" class="btn_play">&#10148;</a>/button></li>
+                <li><a href="" class="btn_play">&#10148;</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <div class="estrutura">
-            <div class="objs">
-                objs
+            <div>
+ 				<ul id="objs" class="theUL">
+				</ul>
             </div>
 
             <div class="layout">
-                layout
+                <canvas width="800px" height="600px" id="canvas">Your Browser does not support HTML5</canvas>
             </div>
 
             <div class="props">
@@ -47,5 +48,8 @@
             </div>
         </div>
     </main>
+
+    <script src="canvas_rendering.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
