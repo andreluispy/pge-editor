@@ -1,20 +1,14 @@
 // Vars
 var objs_html = document.getElementById("objs")
 var objs = []
-
-function delObjs(i) {
-    objs.pop(i)
-    objects.pop(i)
-}
+var props_html = document.getElementsByClassName("props")[0]
 
 function update_editor() {
     // Update Objects View
-    var to_write = ""
-    for (obj in objs) {
-        to_write = to_write + "<li onclick=\"delObjs("+objs.length+")\"><span class=\"caret\">"+objs[obj].name+"</span></li>"
+    var to_write = makeObjHtml()
+    if (objs_html.innerHTML !== to_write) {
+        objs_html.innerHTML = to_write
     }
-    objs_html.innerHTML = "<ul id=\"objs\">"+to_write+"</ul>"
-
 
     // Add Objects
     canvas.onclick = event => {
@@ -22,7 +16,7 @@ function update_editor() {
         if (event.detail === 2) {
             objs.push({
                 name: 'NewRect',
-                rendering: new Rect(mousePos.x, mousePos.y, 32, 32, "blue")
+                rendering: new Rect(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, 32, "blue")
             })
         }
     }

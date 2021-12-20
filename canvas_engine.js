@@ -37,6 +37,11 @@ function getMousePos(evt) {
     }
 }
 
+function getObjType(){
+    let objT = prompt
+    return objT
+}
+
 class Rect{
     type = 'rect'
     x = 0

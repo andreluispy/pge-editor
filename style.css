@@ -98,6 +98,8 @@ cursor: pointer;
   .caret {
     cursor: pointer;
     user-select: none; /* Prevent text selection */
+    padding: 10px;
+    border: solid 3px black;
   }
   
   /* Create the caret/arrow with a unicode, and style it */
@@ -107,3 +109,8 @@ cursor: pointer;
     display: inline-block;
     margin-right: 6px;
   }
+
+  #objs-container {
+    overflow-y: auto;
+    height: 600px;
+}
