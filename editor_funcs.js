@@ -29,7 +29,7 @@ function prop_Load(i){
     new_html = `<h3 id="props_obj_name">Obj: ${obj.name}</h3><br><button onclick="delObjs(${i})" style="width:100%">Delete Object</button>`
     
     // obj.name
-    new_html = `${new_html}<br><br><hr><br><label>Name: </label><input value="${obj.name}" onchange="renameObj(${i}, this)"><br>`
+    new_html = `${new_html}<br><br><hr><br><label>Name: </label><input type="text" value="${obj.name}" onchange="renameObj(${i}, this)"><br>`
 
     let objProps = Object.keys(obj.rendering)
     for (objProp in objProps){
