@@ -1,0 +1,27 @@
+{
+  "name": "pge-editor",
+  "version": "1.0.0",
+  "description": "Cross-platform Engine for Python and JS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreluispy/pge-editor.git"
+  },
+  "keywords": [
+    "engine",
+    "python",
+    "javascript"
+  ],
+  "author": "Team Dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andreluispy/pge-editor/issues"
+  },
+  "homepage": "https://github.com/andreluispy/pge-editor#readme",
+  "devDependencies": {
+    "electron": "^16.0.5"
+  }
+}
