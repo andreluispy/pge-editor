@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGE Engine</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
     <header>
@@ -13,21 +15,21 @@
             <ul>
                 <li><a>Project</a>
                     <ul>
-                        <li><a href="">New</a></li>
-                        <li><a href="">Open</a></li>
-                        <li><a href="">Save</a></li>
-                        <li><a href="">Save As...</a></li>
-                        <li><a href="">Close Project</a></li>
+                        <li><a>New</a></li>
+                        <li><a>Open</a></li>
+                        <li><a>Save</a></li>
+                        <li><a>Save As...</a></li>
+                        <li><a>Close Project</a></li>
                     </ul>
                 </li>
                 <li><a>Settings</a>
                     <ul>
-                        <li><a href="">Font Size</a></li>
-                        <li><a href="">Theme</a></li>
-                        <li><a href="">Reset Defaults</a></li>
+                        <li><a>Font Size</a></li>
+                        <li><a>Theme</a></li>
+                        <li><a>Reset Defaults</a></li>
                     </ul>
                 </li>
-                <li><a href="" class="btn_play">&#10148;</a></li>
+                <li><a onclick="export_to_python(objs)" class="btn_play">&#10148;</a></li>
             </ul>
         </nav>
     </header>
@@ -57,17 +59,16 @@
         <select name="objToAdd" id="objToAdd">
             <option value="rect">Rect</option>
             <option value="circle">Circle</option>
-            <option value="sprite">Sprite</option>
             <option value="text">Text</option>
-            <option value="button">Button</option>
         </select>
         <button id="confirmAdd">OK</button>
         </div>
     
     </div>
 
-    <script src="canvas_engine.js"></script>
-    <script src="editor_funcs.js"></script>
-    <script src="index.js"></script>
+    <script src="js/canvas_engine.js"></script>
+    <script src="js/editor_funcs.js"></script>
+    <script src="js/export_python.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
