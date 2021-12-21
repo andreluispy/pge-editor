@@ -18,21 +18,7 @@ function renameObj(i, inputbox){
 }
 
 function renderChange(i, inputBox, type){
-    if (type == "x"){
-        objs[i].rendering.x = inputBox.value
-    }
-    else if (type == "y"){
-        objs[i].rendering.y = inputBox.value
-    }
-    else if (type == "width"){
-        objs[i].rendering.width = inputBox.value
-    }
-    else if (type == "height"){
-        objs[i].rendering.height = inputBox.value
-    }
-    else if (type == "color"){
-        objs[i].rendering.color = inputBox.value
-    }
+    objs[i].rendering[type] = inputBox.value
 }
 
 function prop_Load(i){
@@ -43,21 +29,54 @@ function prop_Load(i){
     new_html = `<h3 id="props_obj_name">Obj: ${obj.name}</h3><br><button onclick="delObjs(${i})" style="width:100%">Delete Object</button>`
     
     // obj.name
-    new_html = `${new_html}<br><br><hr><br><label>Name: </label><input value="${obj.name}" onchange="renameObj(${i}, this)">`
+    new_html = `${new_html}<br><br><hr><br><label>Name: </label><input value="${obj.name}" onchange="renameObj(${i}, this)"><br>`
 
-    new_html = `${new_html}<br>
-    
-    <label for="posx">Pos X: </label><input name="posx" value="${obj.rendering.x}" onchange="renderChange(${i}, this, 'x')"><br>
-    
-    <label>Pos Y: </label><input value="${obj.rendering.y}" onchange="renderChange(${i}, this, 'y')"><br>
-    
-    <label>Width: </label><input value="${obj.rendering.width}" onchange="renderChange(${i}, this, 'width')"><br>
-    
-    <label>Height: </label><input value="${obj.rendering.height}" onchange="renderChange(${i}, this, 'height')"><br>
-    
-    <label>color: </label><input value="${obj.rendering.color}" onchange="renderChange(${i}, this, 'color')">
-    
-    `
+    let objProps = Object.keys(obj.rendering)
+    for (objProp in objProps){
+        if (objProps[objProp] == "type"){
+            continue
+        }
+        else if (objProps[objProp] == "color"){
+            new_html = `${new_html}<br><label>Color: </label><input type="color" value="${obj.rendering.color}" onchange="renderChange(${i}, this, 'color')"><br>`
+        }
+        else if (objProps[objProp] == "font" || objProps[objProp] == "text"){
+            new_html = `${new_html}<br><label>${objProps[objProp]}: </label><input type="text" value="${obj.rendering[objProps[objProp]]}" onchange="renderChange(${i}, this, '${objProps[objProp]}')"><br>`
+        }
+        else {
+            new_html = `${new_html}<br><label>${objProps[objProp]}: </label><input type="number" value="${obj.rendering[objProps[objProp]]}" onchange="renderChange(${i}, this, '${objProps[objProp]}')"><br>`
+        }
+    }
 
     props_html.innerHTML = new_html
+}
+
+function openModal(mousePos){
+    // Get the modal
+    var modal = document.getElementById("ModalBox")
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0]
+    modal.style.display = "block"
+    var confirm = document.getElementById("confirmAdd")
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none"
+    }
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none"
+    }
+    }
+
+    confirm.onclick = function() {
+        modal.style.display = "none"
+
+        let objType = document.getElementById("objToAdd").value
+        if (objType == "rect"){
+            return {
+                name: 'NewRect',
+                rendering: new Rect(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, 32, "blue")
+            }
+        }
+    }
 }

@@ -37,11 +37,6 @@ function getMousePos(evt) {
     }
 }
 
-function getObjType(){
-    let objT = prompt
-    return objT
-}
-
 class Rect{
     type = 'rect'
     x = 0
@@ -62,5 +57,52 @@ class Rect{
     draw(){
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
+    }
+}
+
+class Circle{
+    type = 'circle'
+    x = 0
+    y = 0
+    radius = 0
+    color = ''
+
+    constructor(x, y, radius, color){
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        
+        objects.push(this)
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = this.color
+        ctx.fill();
+    }
+}
+
+class CText{
+    type = 'text'
+    x = 0
+    y = 0
+    text = ""
+    font = "48px arial"
+    color = "white"
+
+    constructor(text, x, y, color, font='48px arial'){
+        this.text = text
+        this.x = x
+        this.y = y
+        this.font = font
+        this.color = color
+        
+        objects.push(this)
+    }
+    draw(){
+        ctx.font = this.font
+        ctx.fillStyle = this.color
+        ctx.fillText(this.text, this.x, this.y)
     }
 }

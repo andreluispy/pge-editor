@@ -47,6 +47,25 @@
         </div>
     </main>
 
+    <!-- ModalBox -->
+    <div id="ModalBox" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Select a Object to Add:</p>
+        <br>
+        <select name="objToAdd" id="objToAdd">
+            <option value="rect">Rect</option>
+            <option value="circle">Circle</option>
+            <option value="sprite">Sprite</option>
+            <option value="text">Text</option>
+            <option value="button">Button</option>
+        </select>
+        <button id="confirmAdd">OK</button>
+        </div>
+    
+    </div>
+
     <script src="canvas_engine.js"></script>
     <script src="editor_funcs.js"></script>
     <script src="index.js"></script>
