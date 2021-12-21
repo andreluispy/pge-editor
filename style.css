@@ -6,6 +6,7 @@ body{
 :root{
     --cor-hover: rgba(255,255,255, .2);
     --cor-bg: #000;
+    --cor-bg2: rgb(32, 32, 32);
     --cor-font-menu: #eee;
 }
 
@@ -135,7 +136,7 @@ cursor: pointer;
   /* Modal Content/Box */
   .modal-content {
     background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: var(--cor-hover); /* Black w/ opacity */
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
@@ -156,3 +157,33 @@ cursor: pointer;
     text-decoration: none;
     cursor: pointer;
   } 
+
+
+button:active {
+    filter: brightness(200%);
+}
+input {
+    width: 12em;
+    float: right;
+    height: 2.2em;
+}
+select, button, input[type="text"], input[type="number"] {
+    background-color: var(--cor-bg);
+    border: none;
+    padding: 7px;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
+    color: var(--cor-font-menu);
+    transition: all .5s;
+}
+input:hover, select:hover, button:hover {
+    background-color: var(--cor-bg2);
+    cursor: pointer
+}
+input[type="color"] {
+    height: 20px;
+    border:none;
+    outline: none
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
