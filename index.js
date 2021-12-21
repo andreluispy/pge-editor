@@ -28,19 +28,19 @@ function modalConfirm() {
     if (objType == "rect"){
         toReturn = {
             name: 'NewRect',
-            rendering: new Rect(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, 32, "blue")
+            rendering: new Rect(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, 32, "#0000ff")
         }
     }
     else if (objType == "circle"){
         toReturn = {
             name: 'NewCircle',
-            rendering: new Circle(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, "blue")
+            rendering: new Circle(mousePos.x.toFixed(2), mousePos.y.toFixed(2), 32, "#0000ff")
         }
     }
     else if (objType == "text"){
         toReturn = {
             name: 'NewText',
-            rendering: new CText("Hello World", mousePos.x.toFixed(2), mousePos.y.toFixed(2), "blue", "25px Arial")
+            rendering: new CText("Hello World", mousePos.x.toFixed(2), mousePos.y.toFixed(2), "#ffffff", "25px Arial")
         }
     }
 
