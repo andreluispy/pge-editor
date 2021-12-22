@@ -85,3 +85,39 @@ function openModal(mousePos){
 function ProjectClose(){
     close()
 }
+
+function openIDE(){
+    let url = window.URL.createObjectURL(new Blob([`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <title>IDE - ace prefab</title>
+    <style type="text/css" media="screen">
+        #editor { 
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    </head>
+    <body>
+    
+    <div id="editor">def start():
+        pass
+    
+    def update():
+        pass
+    </div>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/python");
+    </script>
+    </body>
+    </html>`], {type: 'text/html'}))
+
+    window.open(url, "_blank")
+}
