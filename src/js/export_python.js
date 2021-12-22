@@ -43,18 +43,9 @@ ${objs_to_draw}
 
 game()`
 
-    var txtFile = "/home/andre/game.py"
-    var file = new File([], txtFile)
-
-    var textFile = null,
-    makeTextFile = function (text) {
-        var data = new Blob([text], {type: 'text/plain'})
-  
-        if (textFile !== null) {
-            window.URL.revokeObjectURL(textFile)
-        }
-        textFile = window.URL.createObjectURL(data)
-        return textFile
-    };
-    window.open(makeTextFile(python_code), "_blank")
+    var a = document.getElementById("a");
+    var file = new Blob([python_code], {type: "text/html"});
+    a.href = URL.createObjectURL(file);
+    a.download = "game.py";
+    a.click();
 }
