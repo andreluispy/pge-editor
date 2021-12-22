@@ -2,7 +2,7 @@
   "name": "pge-editor",
   "version": "1.0.0",
   "description": "Cross-platform Engine for Python and JS",
-  "main": "main.js",
+  "main": "src/server/main.js",
   "scripts": {
     "start": "electron ."
   },
