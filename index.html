@@ -5,9 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGE Engine</title>
+    <!-- ALL CSS PGE -->
     <link rel="stylesheet" href="src/css/menu.css">
     <link rel="stylesheet" href="src/css/modal.css">
     <link rel="stylesheet" href="src/css/general.css">
+    <!-- ALL SCRIPTS PGE, FRONT AND BACK -->
+    <script src="src/js/canvas_engine.js" defer></script>
+    <script src="src/js/editor_funcs.js" defer></script>
+    <script src="src/js/export_python.js" defer></script>
+    <script src="src/js/index.js" defer></script>
+    <script src="src/js/MenuFunction.js" defer></script>
 </head>
 <body>
     <header>
@@ -15,11 +22,11 @@
             <ul>
                 <li><a>Project</a>
                     <ul>
-                        <li><a>New</a></li>
+                        <li><a id="NewProject">New</a></li>
                         <li><a>Open</a></li>
-                        <li><a id="save">Save</a></li>
+                        <li><a id="saveProject">Save</a></li>
                         <li><a id="openIDE" onclick="openIDE()">Open Script Editor</a></li>
-                        <li><a onclick="ProjectClose()">Close Project</a></li>
+                        <li><a id="closeProject">Close Project</a></li>
                     </ul>
                 </li>
                 <li><a>Settings</a>
@@ -67,10 +74,5 @@
     </div>
 
     <a id="a" hidden></a>
-
-    <script src="src/js/canvas_engine.js"></script>
-    <script src="src/js/editor_funcs.js"></script>
-    <script src="src/js/export_python.js"></script>
-    <script src="src/js/index.js"></script>
 </body>
 </html>
