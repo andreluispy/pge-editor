@@ -80,3 +80,8 @@ function openModal(mousePos){
         }
     }
 }
+
+// Close Windows
+function ProjectClose(){
+    close()
+}
