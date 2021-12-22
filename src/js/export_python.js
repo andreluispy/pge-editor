@@ -1,20 +1,32 @@
 function export_to_python(objs){
     let objs_to_write = ""
     let objs_to_draw = ""
+
     for (obj in objs){
-        if (objs[obj].rendering.type == "rect"){
-            objs_to_write = `${objs_to_write}        self.${objs[obj].name}=pge.${objs[obj].rendering.type}( (${objs[obj].rendering.x}, ${objs[obj].rendering.y}), (${objs[obj].rendering.width}, ${objs[obj].rendering.height}), "${objs[obj].rendering.color}")\n`
-        }
-        else if (objs[obj].rendering.type == "circle"){
-            objs_to_write = `${objs_to_write}        self.${objs[obj].name}=pge.${objs[obj].rendering.type}( (${objs[obj].rendering.x}, ${objs[obj].rendering.y}), "${objs[obj].rendering.color}", ${objs[obj].rendering.radius})\n`
+        let objProps = Object.keys(objs[obj].rendering)
+        let objValues = ""
+        for (objProp in objProps){
+            if (objProps[objProp] == "type"){
+                continue
+            }
+            else if (objProps[objProp] == "color"){
+                objValues = `${objValues}${objProps[objProp]}="${ objs[obj].rendering[ objProps[objProp] ]}",`
+            }
+            else if (objProps[objProp] == "font"){
+                objValues = `${objValues}font="${ objs[obj].rendering[ objProps[objProp] ].split(" ")[1]}", font_size=${ objs[obj].rendering[ objProps[objProp] ].split(" ")[0]},`
+            }
+            else {
+                objValues = `${objValues}${objProps[objProp]}=${ objs[obj].rendering[ objProps[objProp] ]},`
+            }
         }
 
         if (objs[obj].rendering.type == "text"){
-            objs_to_write = `${objs_to_write}        self.${objs[obj].name}=pge.text()\n`
-            objs_to_draw = `${objs_to_draw}        self.${objs[obj].name}.draw( "${objs[obj].rendering.text}", "${objs[obj].rendering.font.split(" ")[1]}", ${(objs[obj].rendering.font.split(" ")[0]).slice(0, -2)}, (${objs[obj].rendering.x}, ${objs[obj].rendering.y}), "${objs[obj].rendering.color})"\n`
+            objs_to_write = `${objs_to_write}        self.${objs[obj].name}=pge.${objs[obj].rendering.type}()\n`
+            objs_to_draw = `${objs_to_draw}        self.${objs[obj].name}draw(${objValues.slice(0, -1)})\n`
         }
         else {
-            objs_to_draw = `${objs_to_draw}        self.${objs[obj].name}.draw() \n`
+            objs_to_write = `${objs_to_write}        self.${objs[obj].name}=pge.${objs[obj].rendering.type}(${objValues.slice(0, -1)})\n`        
+            objs_to_draw = `${objs_to_draw}        self.${objs[obj].name}draw()\n`
         }
     }
 
@@ -45,7 +57,4 @@ game()`
         return textFile
     };
     window.open(makeTextFile(python_code), "_blank")
-    
-    console.log(python_code)
-    console.log(objs)
 }
