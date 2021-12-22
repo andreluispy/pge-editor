@@ -81,11 +81,6 @@ function openModal(mousePos){
     }
 }
 
-// Close Windows
-function ProjectClose(){
-    close()
-}
-
 function openIDE(){
     let url = window.URL.createObjectURL(new Blob([`<!DOCTYPE html>
     <html lang="en">
