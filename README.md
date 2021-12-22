@@ -1,7 +1,7 @@
 # pge-editor
- A Editor for PGE-Engine
+  A web-based Game Engine to make games with Python or JS 
 
- The editor is maked with HTML/CSS/JS
+ The editor is maked with HTML/CSS/JS and Electron
 
 # The Engine Team and Contributors
 
