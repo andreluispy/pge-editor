@@ -7,7 +7,12 @@ closeProject.addEventListener('click', ()=>{
 })
 
 
-// OPEM IDE
+// OPEN IDE
 openIDE.addEventListener('click', ()=>{
     ipc.send('openIDE')
+})
+
+// SAVE FILE
+saveProject.addEventListener('click', ()=>{
+    ipc.send('saveProject')
 })

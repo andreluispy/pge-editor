@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const ipc = ipcMain
 
 
@@ -27,6 +27,32 @@ const createWindow = () =>{
 
     //  OPEN IDE
     ipc.on('openIDE', ChildWin)
+
+    // SAVE FILE
+    ipc.on('saveProject', ()=>{
+      dialog.showSaveDialog({
+        title: 'Salvando Arquivo',
+        message: 'Salve seu arquivo',
+        buttonLabel: 'Salvar',
+        nameFieldLabel: 'Arquivo',
+        filters:[
+          {
+            name: 'All',
+            extensions: ['*']
+          },
+          {
+            name: 'Python',
+            extensions: ['py']
+          },
+          {
+            name: 'Text',
+            extensions: ['txt']
+          },
+        ]
+      }, (filename, bookmark)=>{
+        console.log(filename)
+      })
+    })
 }
 
 
