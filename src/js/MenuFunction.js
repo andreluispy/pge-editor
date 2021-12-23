@@ -16,3 +16,8 @@ openIDE.addEventListener('click', ()=>{
 saveProject.addEventListener('click', ()=>{
     ipc.send('saveProject')
 })
+
+// OPEN FILE
+openFile.addEventListener('click', ()=>{
+    ipc.send('openFile')
+})

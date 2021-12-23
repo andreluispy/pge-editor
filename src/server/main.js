@@ -28,6 +28,7 @@ const createWindow = () =>{
     //  OPEN IDE
     ipc.on('openIDE', ChildWin)
 
+    
     // SAVE FILE
     ipc.on('saveProject', ()=>{
       dialog.showSaveDialog({
@@ -53,8 +54,33 @@ const createWindow = () =>{
         console.log(filename)
       })
     })
-}
 
+    // OPEN FILE
+    ipc.on('openFile', ()=>{
+      dialog.showOpenDialog({
+        title: 'Abrir Arquivo',
+        message: 'Abrir arquivo',
+        buttonLabel: 'Abrir',
+        properties:['openFile'],
+        filters:[
+          {
+            name: 'All',
+            extensions: ['*']
+          },
+          {
+            name: 'Python',
+            extensions: ['py']
+          },
+          {
+            name: 'Text',
+            extensions: ['txt']
+          },
+        ]
+      }, (filepaths, bookmark)=>{
+        console.log(filepaths)
+      })
+    })
+}
 
 app.whenReady().then(() => {
     createWindow()
