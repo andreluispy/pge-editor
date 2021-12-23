@@ -5,3 +5,9 @@ const ipc = ipcRenderer
 closeProject.addEventListener('click', ()=>{
     ipc.send('closeProject')
 })
+
+
+// OPEM IDE
+openIDE.addEventListener('click', ()=>{
+    ipc.send('openIDE')
+})
