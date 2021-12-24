@@ -80,6 +80,8 @@ const createWindow = () =>{
         console.log(filepaths)
       })
     })
+
+    ipc.on('NewProject', createWindow)
 }
 
 app.whenReady().then(() => {

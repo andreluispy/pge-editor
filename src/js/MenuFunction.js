@@ -21,3 +21,7 @@ saveProject.addEventListener('click', ()=>{
 openFile.addEventListener('click', ()=>{
     ipc.send('openFile')
 })
+
+NewProject.addEventListener('click', ()=>{
+    ipc.send('NewProject')
+})
