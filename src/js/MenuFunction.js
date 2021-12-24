@@ -17,6 +17,11 @@ saveProject.addEventListener('click', ()=>{
     ipc.send('saveProject')
 })
 
+// EXPORT FILE
+exportProject.addEventListener('click', ()=>{
+    ipc.send('exportProject', objs)
+})
+
 // OPEN FILE
 openFile.addEventListener('click', ()=>{
     ipc.send('openFile')

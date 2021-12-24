@@ -1,3 +1,5 @@
+const fs = require('fs')
+const { exec } = require("child_process")
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const ipc = ipcMain
 
@@ -28,32 +30,38 @@ const createWindow = () =>{
     //  OPEN IDE
     ipc.on('openIDE', ChildWin)
 
+
+    // Export Game
+    ipc.on('exportProject', (event, objs)=>{
+      fs.writeFile("./projects/game.py", `import pge2d as pge
+
+class game(pge.game):
+    window_size = (800, 600)
+    window_color = (94, 94, 94)
+    
+    def start(self):
+        pge.loadSceneJSON(open("./scene.json"))
+    def update(self):
+        pass
+
+game()`, (err)=>{})
+
+      storeData(objs, "./projects/scene.json")
+
+      exec("cd projects && python3 game.py", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`)
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`)
+        }
+        console.log(`stdout: ${stdout}`)
+    })
+    })
+
     
     // SAVE FILE
-    ipc.on('saveProject', ()=>{
-      dialog.showSaveDialog({
-        title: 'Salvando Arquivo',
-        message: 'Salve seu arquivo',
-        buttonLabel: 'Salvar',
-        nameFieldLabel: 'Arquivo',
-        filters:[
-          {
-            name: 'All',
-            extensions: ['*']
-          },
-          {
-            name: 'Python',
-            extensions: ['py']
-          },
-          {
-            name: 'Text',
-            extensions: ['txt']
-          },
-        ]
-      }, (filename, bookmark)=>{
-        console.log(filename)
-      })
-    })
+    ipc.on('saveProject', (event)=>{})
 
     // OPEN FILE
     ipc.on('openFile', ()=>{
@@ -101,4 +109,12 @@ const ChildWin = ()=>{
 
   win.loadFile('IDE.html')
   win.setMenuBarVisibility(false)
+}
+
+const storeData = (data, path) => {
+  try {
+    fs.writeFileSync(path, `{"scene":${JSON.stringify(data)}}`)
+  } catch (err) {
+    console.error(err)
+  }
 }
