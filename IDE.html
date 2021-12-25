@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDE - ace prefab</title>
+    <title>PGE - Script Editor</title>
     <link rel="stylesheet" href="src/css/IDE.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="src/js/ideFunctions.js" defer></script>
 </head>
 <body>
-    <div id="editor">def start():
-        pass
-    
-    def update():
-        pass
-    </div>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/python");
-    </script>
+    <div id="editor"></div>
+    <!-- saveScript -->
 </body>
 </html>

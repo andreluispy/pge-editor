@@ -3,7 +3,7 @@ from sys import exit
 from json import load as json_load
 
 display = None
-sceneObjs = []
+sceneObjs = {}
 
 class game:
     window_size = (800, 600)
@@ -39,9 +39,9 @@ class game:
 
             self.update()
             
-            if sceneObjs != []:
-                for obj in sceneObjs:
-                    obj.draw()
+            if sceneObjs != {}:
+                for obj in sceneObjs.keys():
+                    sceneObjs[obj].draw()
 
             pygame.display.update()
 
@@ -305,8 +305,8 @@ def loadSceneJSON(scene):
 
     for obj in objs:
         if obj["rendering"]["type"] == "rect":
-            sceneObjs.append(rect((float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), (float(obj["rendering"]["width"]), float(obj["rendering"]["height"])), obj["rendering"]["color"]))
+            sceneObjs[obj["name"]] = (rect((float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), (float(obj["rendering"]["width"]), float(obj["rendering"]["height"])), obj["rendering"]["color"]))
         elif obj["rendering"]["type"] == "circle":
-            sceneObjs.append(circle((float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"], float(obj["rendering"]["radius"])))
+            sceneObjs[obj["name"]] = (circle((float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"], float(obj["rendering"]["radius"])))
         elif obj["rendering"]["type"] == "text":
-            sceneObjs.append(text(obj["rendering"]["text"], obj["rendering"]["font"].split()[1], obj["rendering"]["font"].split()[0], (float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"]))
+            sceneObjs[obj["name"]] = (text(obj["rendering"]["text"], obj["rendering"]["font"].split()[1], obj["rendering"]["font"].split()[0], (float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"]))

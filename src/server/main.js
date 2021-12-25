@@ -34,6 +34,7 @@ const createWindow = () =>{
     // Export Game
     ipc.on('exportProject', (event, objs)=>{
       fs.writeFile("./projects/game.py", `import pge2d as pge
+import code
 
 class game(pge.game):
     window_size = (800, 600)
@@ -41,8 +42,10 @@ class game(pge.game):
     
     def start(self):
         pge.loadSceneJSON(open("./scene.json"))
+
+        code.start()
     def update(self):
-        pass
+        code.update()
 
 game()`, (err)=>{})
 
@@ -109,6 +112,10 @@ const ChildWin = ()=>{
 
   win.loadFile('IDE.html')
   win.setMenuBarVisibility(false)
+
+  ipc.on('saveScript', (event, script)=>{
+    fs.writeFile("./projects/code.py", script, (err)=>{})
+  })
 }
 
 const storeData = (data, path) => {
