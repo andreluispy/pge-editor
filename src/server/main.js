@@ -51,7 +51,7 @@ game()`, (err)=>{})
 
       storeData(objs, "./projects/scene.json")
 
-      exec("cd projects && python3 game.py", (error, stdout, stderr) => {
+      exec("cd projects && ./envoriment/linux", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`)
         }
