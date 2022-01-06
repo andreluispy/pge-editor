@@ -41,12 +41,9 @@ function copyFolderRecursiveSync( source, target ) {
     }
 }
 
-const system = process.platform
-if (system === 'win32') {
-  system = 'windows'
-}
-else if (system === 'darwin') {
-  system = 'mac'
+const systemName = process.platform
+if (systemName === 'win32') {
+  const SystemRun = 'windows'
 }
 
 const createWindow = () =>{
@@ -92,7 +89,7 @@ class game(pge.game):
     })
 
     ipc.on('runProject', (event, objs)=>{
-      exec("cd projects && ./envoriment/build/"+system+"/game", (error, stdout, stderr) => {
+      exec("cd projects && ./envoriment/build/"+SystemRun +"/game", (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
 
         if (error) {
