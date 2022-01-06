@@ -20,6 +20,13 @@ saveProject.addEventListener('click', ()=>{
 // EXPORT FILE
 exportProject.addEventListener('click', ()=>{
     ipc.send('exportProject', objs)
+    ipc.send('runProject')
+})
+
+// BUILD FILE
+buildProject.addEventListener('click', ()=>{
+    ipc.send('exportProject', objs)
+    ipc.send('buildProject')
 })
 
 // OPEN FILE

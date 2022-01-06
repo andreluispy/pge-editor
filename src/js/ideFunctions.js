@@ -7,7 +7,7 @@ setInterval(function () {document.addEventListener('keydown', function (e) {keys
 function get_pressed(_key) {if (_key in keys) {return true == true}}
 let editor_font_size = 25
 
-fs.readFile('projects/code.py', 'utf8', function(err, data) {
+fs.readFile('projects/data/code.py', 'utf8', function(err, data) {
     document.getElementById("editor").innerHTML = data
     var editor = ace.edit("editor")
     editor.setTheme("ace/theme/monokai")

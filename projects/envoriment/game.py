@@ -1,0 +1,5 @@
+file = open('data/game.py', 'r')
+file2 = open('data/code.py', 'r')
+exec("import pge2d as pge\n"+file2.read()+"\n"+file.read()+"\ngame()\n")
+file.close()
+file2.close()

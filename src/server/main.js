@@ -2,7 +2,52 @@ const fs = require('fs')
 const { exec } = require("child_process")
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const ipc = ipcMain
+var path = require('path')
 
+function copyFileSync( source, target ) {
+
+    var targetFile = target;
+
+    // If target is a directory, a new file with the same name will be created
+    if ( fs.existsSync( target ) ) {
+        if ( fs.lstatSync( target ).isDirectory() ) {
+            targetFile = path.join( target, path.basename( source ) );
+        }
+    }
+
+    fs.writeFileSync(targetFile, fs.readFileSync(source));
+}
+
+function copyFolderRecursiveSync( source, target ) {
+    var files = [];
+
+    // Check if folder needs to be created or integrated
+    var targetFolder = path.join( target, path.basename( source ) );
+    if ( !fs.existsSync( targetFolder ) ) {
+        fs.mkdirSync( targetFolder );
+    }
+
+    // Copy
+    if ( fs.lstatSync( source ).isDirectory() ) {
+        files = fs.readdirSync( source );
+        files.forEach( function ( file ) {
+            var curSource = path.join( source, file );
+            if ( fs.lstatSync( curSource ).isDirectory() ) {
+                copyFolderRecursiveSync( curSource, targetFolder );
+            } else {
+                copyFileSync( curSource, targetFolder );
+            }
+        } );
+    }
+}
+
+const system = process.platform
+if (system === 'win32') {
+  system = 'windows'
+}
+else if (system === 'darwin') {
+  system = 'mac'
+}
 
 const createWindow = () =>{
     const win = new BrowserWindow({
@@ -33,35 +78,54 @@ const createWindow = () =>{
 
     // Export Game
     ipc.on('exportProject', (event, objs)=>{
-      fs.writeFile("./projects/game.py", `import pge2d as pge
-import code
-
+      fs.writeFile("./projects/data/game.py", `
 class game(pge.game):
     window_size = (800, 600)
     window_color = (94, 94, 94)
     
     def start(self):
-        pge.loadSceneJSON(open("./scene.json"))
-
-        code.start()
+        pge.loadSceneJSON(open("./data/scene.json"))
+        start()
     def update(self):
-        code.update()
+        update()`, (err)=>{})
+        storeData(objs, "./projects/data/scene.json")
+    })
 
-game()`, (err)=>{})
+    ipc.on('runProject', (event, objs)=>{
+      exec("cd projects && ./envoriment/build/"+system+"/game", (error, stdout, stderr) => {
+        console.log(`stdout: ${stdout}`)
 
-      storeData(objs, "./projects/scene.json")
-
-      exec("cd projects && ./envoriment/linux", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`)
         }
         if (stderr) {
             console.log(`stderr: ${stderr}`)
         }
-        console.log(`stdout: ${stdout}`)
     })
     })
 
+    // Build Game
+    ipc.on('buildProject', (event, objs)=>{
+      fs.rm("projects/build/linux", { recursive: true }, (error) => {})
+      fs.rm("projects/build/windows", { recursive: true }, (error) => {})
+      console.log("Folders removed")
+
+      copyFolderRecursiveSync(`./projects/envoriment/build/linux`, "./projects/build/")
+      copyFolderRecursiveSync(`./projects/envoriment/build/windows`, "./projects/build/")
+      console.log("Folders Copy")
+
+      fs.copyFile('./projects/data/game.py', './projects/build/linux/data/game.py', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/game.py', './projects/build/windows/data/game.py', (err) => {if (err){throw err}})
+      console.log("Game Copy")
+
+      fs.copyFile('./projects/data/code.py', './projects/build/linux/data/code.py', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/code.py', './projects/build/windows/data/code.py', (err) => {if (err){throw err}})
+      console.log("Code Copy")
+
+      fs.copyFile('./projects/data/scene.json', './projects/build/linux/data/scene.json', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/scene.json', './projects/build/windows/data/scene.json', (err) => {if (err){throw err}})
+      console.log("JSON Copy")
+    })
     
     // SAVE FILE
     ipc.on('saveProject', (event)=>{})
@@ -114,7 +178,7 @@ const ChildWin = ()=>{
   win.setMenuBarVisibility(false)
 
   ipc.on('saveScript', (event, script)=>{
-    fs.writeFile("./projects/code.py", script, (err)=>{})
+    fs.writeFile("./projects/data/code.py", script, (err)=>{})
   })
 }
 

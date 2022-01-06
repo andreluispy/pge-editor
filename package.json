@@ -23,5 +23,8 @@
   "homepage": "https://github.com/andreluispy/pge-editor#readme",
   "devDependencies": {
     "electron": "^16.0.5"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0"
   }
 }
