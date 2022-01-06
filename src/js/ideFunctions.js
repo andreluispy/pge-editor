@@ -5,7 +5,7 @@ const fs = require("fs")
 let keys = {}
 setInterval(function () {document.addEventListener('keydown', function (e) {keys[e.key] = true}); document.addEventListener('keyup', function (e) {delete keys[e.key]})}, 25)
 function get_pressed(_key) {if (_key in keys) {return true == true}}
-let editor_font_size = 25
+let editor_font_size = 16
 
 fs.readFile('projects/data/code.py', 'utf8', function(err, data) {
     document.getElementById("editor").innerHTML = data
