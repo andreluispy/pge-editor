@@ -19,11 +19,11 @@ fs.readFile('projects/data/code.py', 'utf8', function(err, data) {
         if (get_pressed('Control') && get_pressed('s')) {
             ipc.send('saveScript', editor.getValue())
         }
-        if (get_pressed('Control') && get_pressed('.')) {
+        if (get_pressed('Control') && get_pressed('+')) {
             editor_font_size++
             editor.setFontSize(editor_font_size)
         }
-        if (get_pressed('Control') && get_pressed(',')) {
+        if (get_pressed('Control') && get_pressed('-')) {
             editor_font_size--
             editor.setFontSize(editor_font_size)
         }
