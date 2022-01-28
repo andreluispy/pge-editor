@@ -89,7 +89,16 @@ class game(pge.game):
     })
 
     ipc.on('runProject', (event)=>{
-      exec("cd projects && ./envoriment/build/"+SystemRun+"/game", (error, stdout, stderr) => {
+      // start /d "path" file.exe
+      // ./envoriment/build/"+SystemRun+"/game
+
+      to_exec = "cd projects && "
+      if (SystemRun === 'linux'){
+        to_exec=`${to_exec}start /d "./envoriment/build/${SystemRun}/" game.exe`
+      } else {
+        to_exec=`${to_exec}./envoriment/build/${SystemRun}/game.exe`
+      }
+      exec(to_exec, (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
         if (error) {console.log(`error: ${error.message}`)}
         if (stderr) {console.log(`stderr: ${stderr}`)}})})
