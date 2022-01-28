@@ -89,14 +89,11 @@ class game(pge.game):
     })
 
     ipc.on('runProject', (event)=>{
-      // start /d "path" file.exe
-      // ./envoriment/build/"+SystemRun+"/game
-
       to_exec = "cd projects && "
-      if (SystemRun === 'linux'){
+      if (SystemRun === 'windows'){
         to_exec=`${to_exec}start /d "./envoriment/build/${SystemRun}/" game.exe`
       } else {
-        to_exec=`${to_exec}./envoriment/build/${SystemRun}/game.exe`
+        to_exec=`${to_exec}./envoriment/build/${SystemRun}/game`
       }
       exec(to_exec, (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
@@ -105,8 +102,6 @@ class game(pge.game):
 
     // Build Game
     ipc.on('buildProject', (event, objs)=>{
-      alert("Building Game. The window may brake, please do not close it.")
-
       fs.rm("projects/build/linux", { recursive: true }, (error) => {})
       fs.rm("projects/build/windows", { recursive: true }, (error) => {})
       console.log("Folders removed")
@@ -115,19 +110,17 @@ class game(pge.game):
       copyFolderRecursiveSync(`./projects/envoriment/build/windows`, "./projects/build/")
       console.log("Folders Copy")
 
-      fs.copyFile('./projects/data/game.py', './projects/build/linux/data/game.py', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/game.py', './projects/build/linux/game.py', (err) => {if (err){throw err}})
       fs.copyFile('./projects/data/game.py', './projects/build/windows/data/game.py', (err) => {if (err){throw err}})
       console.log("Game Copy")
 
-      fs.copyFile('./projects/data/code.py', './projects/build/linux/data/code.py', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/code.py', './projects/build/linux/code.py', (err) => {if (err){throw err}})
       fs.copyFile('./projects/data/code.py', './projects/build/windows/data/code.py', (err) => {if (err){throw err}})
       console.log("Code Copy")
 
-      fs.copyFile('./projects/data/scene.json', './projects/build/linux/data/scene.json', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/scene.json', './projects/build/linux/scene.json', (err) => {if (err){throw err}})
       fs.copyFile('./projects/data/scene.json', './projects/build/windows/data/scene.json', (err) => {if (err){throw err}})
       console.log("JSON Copy")
-
-      alert("Game Build with Success")
     })
     
     // SAVE FILE
