@@ -91,9 +91,9 @@ class game(pge.game):
     ipc.on('runProject', (event)=>{
       to_exec = "cd projects && "
       if (SystemRun === 'windows'){
-        to_exec=`${to_exec}start /d "./envoriment/build/${SystemRun}/" game.exe`
+        to_exec=`${to_exec}start /d "./envoriment/build/windows/" game.exe`
       } else {
-        to_exec=`${to_exec}./envoriment/build/${SystemRun}/game`
+        to_exec=`${to_exec}python3 ./game_linux_test.py`
       }
       exec(to_exec, (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
