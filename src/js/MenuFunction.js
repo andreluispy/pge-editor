@@ -6,7 +6,6 @@ closeProject.addEventListener('click', ()=>{
     ipc.send('closeProject')
 })
 
-
 // OPEN IDE
 openIDE.addEventListener('click', ()=>{
     ipc.send('openIDE')

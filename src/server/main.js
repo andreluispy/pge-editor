@@ -17,7 +17,6 @@ function copyFileSync( source, target ) {
 
     fs.writeFileSync(targetFile, fs.readFileSync(source));
 }
-
 function copyFolderRecursiveSync( source, target ) {
     var files = [];
 
@@ -41,9 +40,10 @@ function copyFolderRecursiveSync( source, target ) {
     }
 }
 
-const systemName = process.platform
-if (systemName === 'win32') {
-  const SystemRun = 'windows'
+
+let SystemRun = 'linux'
+if (process.platform === 'win32') {
+  SystemRun = 'windows'
 }
 
 const createWindow = () =>{
@@ -88,21 +88,16 @@ class game(pge.game):
         storeData(objs, "./projects/data/scene.json")
     })
 
-    ipc.on('runProject', (event, objs)=>{
-      exec("cd projects && ./envoriment/build/"+SystemRun +"/game", (error, stdout, stderr) => {
+    ipc.on('runProject', (event)=>{
+      exec("cd projects && ./envoriment/build/"+SystemRun+"/game", (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
-
-        if (error) {
-            console.log(`error: ${error.message}`)
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`)
-        }
-    })
-    })
+        if (error) {console.log(`error: ${error.message}`)}
+        if (stderr) {console.log(`stderr: ${stderr}`)}})})
 
     // Build Game
     ipc.on('buildProject', (event, objs)=>{
+      alert("Building Game. The window may brake, please do not close it.")
+
       fs.rm("projects/build/linux", { recursive: true }, (error) => {})
       fs.rm("projects/build/windows", { recursive: true }, (error) => {})
       console.log("Folders removed")
@@ -122,6 +117,8 @@ class game(pge.game):
       fs.copyFile('./projects/data/scene.json', './projects/build/linux/data/scene.json', (err) => {if (err){throw err}})
       fs.copyFile('./projects/data/scene.json', './projects/build/windows/data/scene.json', (err) => {if (err){throw err}})
       console.log("JSON Copy")
+
+      alert("Game Build with Success")
     })
     
     // SAVE FILE
