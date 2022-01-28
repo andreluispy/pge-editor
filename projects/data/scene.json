@@ -1,1 +1,1 @@
-{"scene":[]}
+{"scene":[{"name":"bg","rendering":{"type":"rect","x":"0","y":"0","width":"800","height":"600","color":"#11ff00"}},{"name":"player","rendering":{"type":"rect","x":"66.67","y":"56.62","width":32,"height":32,"color":"#0000ff"}},{"name":"coin","rendering":{"type":"circle","x":"715.42","y":"532.45","radius":"16","color":"#eeff00"}}]}

@@ -73,6 +73,7 @@ class text:
         antialias: False
         background: None
     '''
+
     def __init__(self, text='', font='Arial', font_size=10, position=(0, 0), color=(0, 0, 0), bold=False, italic=False, antialias=False, background=None):
         self.text = text
         self.font_name = font
@@ -103,6 +104,7 @@ class circle:
     color = (0, 0, 0)
     radius = 0
     type = 'circle'
+    rect = pygame.Rect(0,0,0,0)
 
     def __init__(self, position: tuple, color: tuple, radius):
         self.x, self.y = position
@@ -116,7 +118,6 @@ class circle:
         self.width = self.obj.width
         self.height = self.obj.height
         self.rect=self.obj
-        #self.rect = pygame.Rect(self.x-self.width, self.y-self.height, self.width*2, self.height*2)
 
 class rect:
     '''
@@ -131,6 +132,7 @@ class rect:
     width = 1
     color = (0, 0, 0)
     type = 'rect'
+    rect = pygame.Rect(0,0,0,0)
 
     def __init__(self, position: tuple, size: tuple, color: tuple):
         self.x, self.y = position
@@ -157,6 +159,7 @@ class sprite:
     flip_horizontal = False
     flip_vertical = False
     type = 'sprite'
+    rect = pygame.Rect(0,0,0,0)
 
     def __init__(self, position, img, size=(0, 0)):
         self.x, self.y = position
