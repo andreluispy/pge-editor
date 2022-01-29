@@ -1,1 +1,1 @@
-{"scene":[]}
+{"scene":[{"name":"bg","rendering":{"type":"rect","x":"0","y":"0","width":"800","height":"600","color":"#04ff00"}},{"name":"player","rendering":{"type":"rect","x":"20.90","y":"90.40","width":32,"height":32,"color":"#0000ff"}},{"name":"coin","rendering":{"type":"circle","x":"720.40","y":"541.39","radius":"16","color":"#eeff00"}},{"name":"points_txt","rendering":{"type":"text","x":"6.97","y":"10","text":"Coins: 0","font":"25px Arial","color":"#ffffff"}}]}

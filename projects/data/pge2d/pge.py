@@ -77,7 +77,7 @@ class text:
     def __init__(self, text='', font='Arial', font_size=10, position=(0, 0), color=(0, 0, 0), bold=False, italic=False, antialias=False, background=None):
         self.text = text
         self.font_name = font
-        self.font_size = font_size
+        self.font_size = int(font_size)
         self.x, self.y = position
         self.color = color
         self.bold = bold
@@ -88,7 +88,7 @@ class text:
     def draw(self):
         global display
 
-        self.font = pygame.font.SysFont(self.font_name, self.font_size, self.bold, self.italic)
+        self.font = pygame.font.SysFont(self.font_name, int(self.font_size), self.bold, self.italic)
         self.textsurface = self.font.render(self.text, self.antialias, self.color, self.background)
         display.blit(self.textsurface, (self.x, self.y))
 
@@ -311,4 +311,4 @@ def loadSceneJSON(scene):
         elif obj["rendering"]["type"] == "circle":
              sceneObjs[obj["name"]] = (circle((float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"], float(obj["rendering"]["radius"])))
         elif obj["rendering"]["type"] == "text":
-             sceneObjs[obj["name"]] = (text(obj["rendering"]["text"], obj["rendering"]["font"].split()[1], obj["rendering"]["font"].split()[0], (float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"]))
+             sceneObjs[obj["name"]] = (text(obj["rendering"]["text"], obj["rendering"]["font"].split()[1], (obj["rendering"]["font"].split()[0])[0:-2], (float(obj["rendering"]["x"]), float(obj["rendering"]["y"])), obj["rendering"]["color"]))
