@@ -1,3 +1,5 @@
 node_modules/*
 .vscode/tasks.json
 *.cpython-39.pyc
+
+out/
