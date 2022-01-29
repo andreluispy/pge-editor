@@ -118,9 +118,18 @@ class game(pge.game):
       fs.copyFile('./projects/data/code.py', './projects/build/windows/data/code.py', (err) => {if (err){throw err}})
       console.log("Code Copy")
 
-      fs.copyFile('./projects/data/scene.json', './projects/build/linux/scene.json', (err) => {if (err){throw err}})
+      fs.copyFile('./projects/data/scene.json', './projects/build/linux/data/scene.json', (err) => {if (err){throw err}})
       fs.copyFile('./projects/data/scene.json', './projects/build/windows/data/scene.json', (err) => {if (err){throw err}})
       console.log("JSON Copy")
+
+      if (SystemRun === "windows"){
+        exec("move projects/build/linux/game.py projects/build/linux/g.py", (error, stdout, stderr) => {exec("move projects/build/linux/RUNNER.py projects/build/linux/game.py", (error, stdout, stderr) => {})})
+        exec("move projects/build/linux/code.py projects/build/linux/c.py", (error, stdout, stderr) => {})
+      } else {
+        exec("mv ./projects/build/linux/game.py ./projects/build/linux/g.py", (error, stdout, stderr) => {exec("mv ./projects/build/linux/RUNNER.py ./projects/build/linux/game.py", (error, stdout, stderr) => {})})
+        exec("mv ./projects/build/linux/code.py ./projects/build/linux/c.py", (error, stdout, stderr) => {})
+      }
+      console.log("FILES RENAMED")
     })
     
     // SAVE FILE
