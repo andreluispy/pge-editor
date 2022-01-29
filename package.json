@@ -5,8 +5,6 @@
   "main": "src/server/main.js",
   "scripts": {
     "start": "electron .",
-    "forge-start": "electron-forge start",
-    "package": "electron-forge package",
     "make": "electron-forge make"
   },
   "repository": {
@@ -24,42 +22,8 @@
     "url": "https://github.com/andreluispy/pge-editor/issues"
   },
   "homepage": "https://github.com/andreluispy/pge-editor#readme",
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.63",
-    "@electron-forge/maker-deb": "^6.0.0-beta.63",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
-    "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "electron": "^16.0.5"
-  },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "pge_editor"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+    "electron": "^16.0.8",
+    "electron-forge": "^5.2.4"
   }
 }

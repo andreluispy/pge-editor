@@ -133,33 +133,20 @@ class game(pge.game):
     })
     
     // SAVE FILE
-    ipc.on('saveProject', (event)=>{})
+    ipc.on('saveProject', (event)=>{
+      dialog.showOpenDialog({
+      title: 'Salvar Arquivo',message: 'Salvar arquivo',buttonLabel: 'Salvar',properties:['openFile'],filters:[{name: 'All',extensions: ['*']}]
+    }, (filepaths, bookmark)=>{
+      console.log(filepaths)
+    })})
 
     // OPEN FILE
     ipc.on('openFile', ()=>{
       dialog.showOpenDialog({
-        title: 'Abrir Arquivo',
-        message: 'Abrir arquivo',
-        buttonLabel: 'Abrir',
-        properties:['openFile'],
-        filters:[
-          {
-            name: 'All',
-            extensions: ['*']
-          },
-          {
-            name: 'Python',
-            extensions: ['py']
-          },
-          {
-            name: 'Text',
-            extensions: ['txt']
-          },
-        ]
+        title: 'Abrir Arquivo',message: 'Abrir arquivo',buttonLabel: 'Abrir',properties:['openFile'],filters:[{name: 'All',extensions: ['*']}]
       }, (filepaths, bookmark)=>{
         console.log(filepaths)
-      })
-    })
+      })})
 
     ipc.on('NewProject', createWindow)
 }
