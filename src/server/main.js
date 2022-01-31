@@ -149,7 +149,7 @@ class game(pge.game):
       console.log(filepaths.filePaths[0])
       fs.readFile(filepaths.filePaths[0], 'utf8', function(err, data) {
         console.log(data)
-        // ipcSender.send("loadProject", data)
+        ipc.send("loadProject", data)
       })
     })
 
