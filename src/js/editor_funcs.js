@@ -1,3 +1,15 @@
+/*
+ipcReciver.on('loadProject', (event, data) => {
+    // Load Scene
+    objs = data['o']
+
+    // Load Code
+    let codePreload = data['c']
+
+    console.log("CARREGADO")
+})
+*/
+
 function makeObjHtml(){
     let to_write = ""
     for (obj in objs) {

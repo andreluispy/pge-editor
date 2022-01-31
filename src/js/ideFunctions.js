@@ -7,25 +7,30 @@ setInterval(function () {document.addEventListener('keydown', function (e) {keys
 function get_pressed(_key) {if (_key in keys) {return true == true}}
 let editor_font_size = 16
 
-fs.readFile('projects/data/code.py', 'utf8', function(err, data) {
-    document.getElementById("editor").innerHTML = data
-    var editor = ace.edit("editor")
-    editor.setTheme("ace/theme/monokai")
-    editor.session.setMode("ace/mode/python")
-    editor.setFontSize(editor_font_size)
+if (codePreload != null){
+    document.getElementById("editor").innerHTML = codePreload
+    codePreload = null
+} else {
+    fs.readFile('projects/data/code.py', 'utf8', function(err, data) {
+        document.getElementById("editor").innerHTML = data
+})}
 
-    // EXPORT FILE
-    setInterval(function () {
-        if (get_pressed('Control') && get_pressed('s')) {
-            ipc.send('saveScript', editor.getValue())
-        }
-        if (get_pressed('Control') && get_pressed('+')) {
-            editor_font_size++
-            editor.setFontSize(editor_font_size)
-        }
-        if (get_pressed('Control') && get_pressed('-')) {
-            editor_font_size--
-            editor.setFontSize(editor_font_size)
-        }
-    }, 25)
-})
+var editor = ace.edit("editor")
+editor.setTheme("ace/theme/monokai")
+editor.session.setMode("ace/mode/python")
+editor.setFontSize(editor_font_size)
+
+// EXPORT FILE
+setInterval(function () {
+    if (get_pressed('Control') && get_pressed('s')) {
+        ipc.send('saveScript', editor.getValue())
+    }
+    if (get_pressed('Control') && get_pressed('+')) {
+        editor_font_size++
+        editor.setFontSize(editor_font_size)
+    }
+    if (get_pressed('Control') && get_pressed('-')) {
+        editor_font_size--
+        editor.setFontSize(editor_font_size)
+    }
+}, 25)

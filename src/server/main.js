@@ -57,21 +57,10 @@ const createWindow = () =>{
     })
 
     win.loadFile('index.html')
-    
-    // Leave the screen at its maximum size
-    win.maximize()
-
-    //Menu Bar false
-    win.setMenuBarVisibility(false)
-
-    // CLOSE APP
-    ipc.on('closeProject', () =>{
-      win.close()
-    })
-
-    //  OPEN IDE
-    ipc.on('openIDE', ChildWin)
-
+    win.maximize() // Leave the screen at its maximum size
+    win.setMenuBarVisibility(false) //Menu Bar false
+    ipc.on('closeProject', () =>{win.close()}) // CLOSE APP
+    ipc.on('openIDE', ChildWin) //  OPEN IDE
 
     // Export Game
     ipc.on('exportProject', (event, objs)=>{
@@ -88,6 +77,7 @@ class game(pge.game):
         storeData(objs, "./projects/data/scene.json")
     })
 
+    // Run Game
     ipc.on('runProject', (event)=>{
       to_exec = "cd projects && "
       if (SystemRun === 'windows'){
@@ -98,7 +88,8 @@ class game(pge.game):
       exec(to_exec, (error, stdout, stderr) => {
         console.log(`stdout: ${stdout}`)
         if (error) {console.log(`error: ${error.message}`)}
-        if (stderr) {console.log(`stderr: ${stderr}`)}})})
+        if (stderr) {console.log(`stderr: ${stderr}`)}})
+    })
 
     // Build Game
     ipc.on('buildProject', (event, objs)=>{
@@ -133,20 +124,34 @@ class game(pge.game):
     })
     
     // SAVE FILE
-    ipc.on('saveProject', (event)=>{
-      dialog.showOpenDialog({
-      title: 'Salvar Arquivo',message: 'Salvar arquivo',buttonLabel: 'Salvar',properties:['openFile'],filters:[{name: 'All',extensions: ['*']}]
-    }, (filepaths, bookmark)=>{
-      console.log(filepaths)
-    })})
+    ipc.on('saveProject', async (event, objs, code)=>{
+      let filepaths = await dialog.showSaveDialog(win, {title: "Save file", defaultPath : "./game.json", buttonLabel : "Save File", filters :[{name: 'All Files', extensions: ['*']}]})
+
+
+      if (!filepaths){return;}
+      console.log("Saving File...")
+      console.log(filepaths.filePath)
+      // Write JSON
+      try {
+        console.log("saving json")
+        let json_to_save = {o: objs, c: code}
+        fs.writeFileSync(filepaths.filePath, JSON.stringify(json_to_save))
+      } catch (err) {console.error(err)}
+    })
 
     // OPEN FILE
-    ipc.on('openFile', ()=>{
-      dialog.showOpenDialog({
-        title: 'Abrir Arquivo',message: 'Abrir arquivo',buttonLabel: 'Abrir',properties:['openFile'],filters:[{name: 'All',extensions: ['*']}]
-      }, (filepaths, bookmark)=>{
-        console.log(filepaths)
-      })})
+    ipc.on('openFile', async ()=>{
+      let filepaths = await dialog.showOpenDialog(win, {title: 'Abrir Arquivo',buttonLabel: 'Abrir',properties:['openFile'],filters:[{name: 'All',extensions: ['*']}]})
+
+      if (!filepaths){return;}
+
+      // READ JSON
+      console.log(filepaths.filePaths[0])
+      fs.readFile(filepaths.filePaths[0], 'utf8', function(err, data) {
+        console.log(data)
+        // ipcSender.send("loadProject", data)
+      })
+    })
 
     ipc.on('NewProject', createWindow)
 }
@@ -174,9 +179,9 @@ const ChildWin = ()=>{
   })
 }
 
-const storeData = (data, path) => {
+const storeData = (data, filepath) => {
   try {
-    fs.writeFileSync(path, `{"scene":${JSON.stringify(data)}}`)
+    fs.writeFileSync(filepath, `{"scene":${JSON.stringify(data)}}`)
   } catch (err) {
     console.error(err)
   }

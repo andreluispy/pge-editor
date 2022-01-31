@@ -1,5 +1,6 @@
 const {ipcRenderer} = require('electron')
 const ipc = ipcRenderer
+const fs = require("fs")
 
 // CLOSE APP
 closeProject.addEventListener('click', ()=>{
@@ -9,11 +10,6 @@ closeProject.addEventListener('click', ()=>{
 // OPEN IDE
 openIDE.addEventListener('click', ()=>{
     ipc.send('openIDE')
-})
-
-// SAVE FILE
-saveProject.addEventListener('click', ()=>{
-    ipc.send('saveProject')
 })
 
 // EXPORT FILE
@@ -28,9 +24,16 @@ buildProject.addEventListener('click', ()=>{
     ipc.send('buildProject')
 })
 
+// SAVE FILE
+saveProject.addEventListener('click', ()=>{
+    fs.readFile('projects/data/code.py', 'utf8', function(err, data) {ipc.send('saveProject', objs, data)
+    console.log("SAVE FILE - IPC SEND")})
+})
+
 // OPEN FILE
 openFile.addEventListener('click', ()=>{
     ipc.send('openFile')
+    console.log("OPEN FILE - IPC SEND")
 })
 
 NewProject.addEventListener('click', ()=>{
